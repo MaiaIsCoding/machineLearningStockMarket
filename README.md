@@ -29,4 +29,48 @@
 <li><b>Deep Learning (DL)</b>: É uma subseção de ML que estende as suas capacidades por redes neurais com múltiplas camadas para ir além de apenas catalogar data. DL pode verdadeiramente treinar a si mesmo a partir de grandes quantidades de dados, unindo a eficiência de um computador à capacidade de aprendizado de um ser humano (Touger, 2018)</li>
 </ul>
 
-  Existe ainda mais uma subseção explorada nesse trabalho, a Natural Language Processing (NLP). Uma das áreas de estudo de Machine Learning que combina linguística e inteligência artificial para permitir que máquinas possam processar e utilizar a linguagem natural das pessoas (Ding, 2019).  
+  Existe ainda mais uma subseção explorada nesse trabalho, a Natural Language Processing (NLP). Uma das áreas de estudo de Machine Learning que combina linguística e inteligência artificial para permitir que máquinas possam processar e utilizar a linguagem natural das pessoas (Ding, 2019).
+  
+<h1>Resultados</h1>
+
+Para avaliar os modelos foram utilizadas métricas próprias para ML que calculam a precisão entre os dados reais e os dados previstos. Elas são:
+<ul>
+<li><b>Mean Absolute Error (MAE)</b>: O erro absoluto médio é uma métrica comum usada para medir a precisão de variáveis contínuas, faz a média da diferença absoluta entre o realizado e o previsto (Azank, 2016)</li>
+<li><b>Mean Absolute Percentage Error (MAPE)</b>: O erro percentual absoluto médio calcula o erro obtido através da divisão da diferença entre o predito e o real que é expresso em porcentagem (Azank, 2020)</li>
+<li><b>Mean Squared Error (MSE)</b>: O erro quadrático médio consiste na média do erro das previsões ao quadrado, ou seja, a diferença entre cada um dos valores preditos pelo modelo e os valores reais elevada ao quadrado, em seguida são somados e divididos pelo número de elementos (Azank, 2020)</li>
+<li><b>R Squared (R2)</b>: O coeficiente de determinação. No R-quadrado é calculada a porcentagem da variação entre os valores que pode ser predita pelo modelo. O valor do R-Quadrado varia entre 0 a 1 e normalmente é representado em porcentagem. Por exemplo, um R² = 0.75 nos diz que 75% da variância dos dados podem ser explicados pelo modelo construído (Azank, 2020)</li>
+</ul>
+<br>
+
+![image](https://user-images.githubusercontent.com/61297112/146648718-1adb59fe-81e0-4279-ba58-44b5d2aae5d2.png)
+
+<br>
+Para melhor abordar os resultados obtidos será utilizado como exemplo os resultados do MAE. Essa métrica foi escolhida por ser o resultado mais interessante e explicativo sobre o desempenho dos algoritmos.
+Na comparação dos resultados, é possível ver que o LSTM teve o maior e menor erro quando aplicado com e sem os dados da análise de sentimento.
+O XGBoost teve erros altos em ambos os casos.
+Já o modelo de random forest se saiu melhor no geral, apresentando uma melhora no desempenho, embora não muito significativa, quando levados em consideração os dados do sentimento das notícias.
+
+<br>Série temporal do Random Forest (sem notícias)
+
+![image](https://user-images.githubusercontent.com/61297112/146649262-85f400a7-d7e6-480d-9676-d082151797d9.png)
+
+<br>
+A figura acima apresenta as previsões feitas pelo Random Forest. Nos primeiros 3 meses as previsões formam uma linha plana. Isso acontece com modelos de ML simples como o Random Forest.
+Os dados usados para treinar a máquina devem ter variabilidade e padrões para que a máquina possa identificá-los e fazer suas previsões. Quando o modelo não consegue encontrar um padrão para fazer suas previsões, pode chegar à conclusão de que o melhor resultado é uma linha plana. Esse problema se repetiu no modelo de XGBoost mas não no modelo de LSTM. Isso porque talvez o modelo de LSTM sendo o mais robusto entre os três foi capaz de identificar padrões onde os outros não foram capazes. 
+
+<br>Série temporal do LSTM (sem notícias)
+
+![image](https://user-images.githubusercontent.com/61297112/146649627-ed98dc54-0558-49fe-8e2e-6ed3c04a0ac6.png)
+
+Série temporal do LSTM (com notícias)
+
+![image](https://user-images.githubusercontent.com/61297112/146649641-342b3e1f-836b-4054-b9c7-32959847e41d.png)
+
+<br>
+  Já no caso do LSTM é possível ver como a adição das notícias (figura 19) afetou o desempenho do modelo por si só (figura 18). É difícil dizer o que pode causar uma diferença tão grande. Uma possibilidade é a falta de dados, ou como o modelo lida com ela. Como nem todos os dias tiveram notícias para serem usadas pelo sistema, a quantidade de dados ficou desbalanceada e nem todas as previsões tiveram sentimento de notícias para levar em conta. Essa falta de dados é extremamente prejudicial para alguns modelos de DL.
+
+  Também vale a pena destacar que todos os modelos (incluindo o XGBoost) em certos momentos copiam os valores do dia anterior e suas movimentações sem variância. O random Walk (passeio aleatório) acontece quando um modelo propõe que futuras variações não estão relacionadas a variações anteriores, ou seja, são imprevisíveis. Os modelos, ao perceberem a natureza imprevisível dos dados, chegam à conclusão de que a melhor previsão possível é seguir os valores passados ao invés de tentar prevê-los (Reis, 2019).
+
+<h1>Conclusões</h1>
+
+Embora o XGBoost tenha tido uma perda de qualidade, sendo ela mais do que considerável no caso do LSTM, vale considerar que os resultados do modelo Random Forest — embora não tenham tido uma melhora significativa — apresentaram resultados melhores em todas as métricas. Mas é possível concluir que a relação entre previsões de ML e a análise de sentimento são áreas de estudo promissoras não só para o mercado de ações, mas para as respectivas áreas de aprendizagem de máquina e suas aplicações.
